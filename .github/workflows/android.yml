@@ -138,12 +138,16 @@ jobs:
           name: libzip-android-all-architectures
           path: release-files
 
+      - name: List Downloaded Files
+        run: |
+          echo "Files in release-files:"
+          ls -lah release-files/
+          find release-files -type f -name "*.tar.gz"
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            release-files/libzip-android-all.tar.gz
-            release-files/libzip-android-*.tar.gz
+          files: release-files/*.tar.gz
           generate_release_notes: true
           draft: false
           prerelease: false
